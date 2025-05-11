@@ -1,0 +1,4 @@
+﻿  Painstation.cpp
+C:\Users\Aydee\Desktop\PainStationGit\Painstation\Painstation\Painstation.cpp(46,37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  LINK : C:\Users\Aydee\Desktop\PainStationGit\Painstation\Debug\Painstation.exe not found or not built by the last incremental link; performing full link
+  Painstation.vcxproj -> C:\Users\Aydee\Desktop\PainStationGit\Painstation\Debug\Painstation.exe
