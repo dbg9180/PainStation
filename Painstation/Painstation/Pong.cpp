@@ -3,7 +3,11 @@
 #define SFML_STATIC
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+//#include "serial/serial.h"
+
 using namespace sf;
+
+//serial::Serial mySerial("", 1900, serial::Timeout::simpleTimeout(3000));
 
 float playerSpeed = 200;
 float ballSpeedX = 100;
@@ -46,16 +50,18 @@ void Pong::moveBall(CircleShape* ball, RectangleShape player1, RectangleShape pl
     if ((ballPosition.x >= window->getSize().x - ball->getRadius() * 2) || ballPosition.x <= 0)
     {
         //PAIN INFORMATION GOES HERE
+        //mySerial.flushInput();
+        //mySerial.read(6);
         playerSpeed = 0;
         ballSpeedX = 0;
         ballSpeedY = 0;
     }
     if (player1.getGlobalBounds().contains(ballPosition.x, ballPosition.y - (ballRadius)) || player1.getGlobalBounds().contains(ballPosition.x, ballPosition.y + ballRadius)) {
-        std::cout << "hit player";
+        std::cout << "hit player 1";
         speedModifier = deflectBall(*ball, player1);
     }
     if (player2.getGlobalBounds().contains(ballPosition.x + ballRadius, ballPosition.y - (ballRadius)) || player2.getGlobalBounds().contains(ballPosition.x + ballRadius, ballPosition.y + ballRadius)) {
-        std::cout << "hit player";
+        std::cout << "hit player 2";
         speedModifier = deflectBall(*ball, player2);
     }
     ballSpeedX *= speedModifier.x;
@@ -68,14 +74,29 @@ Vector2f Pong::deflectBall(CircleShape ball, RectangleShape player) {
     Vector2f ballPosition = ball.getPosition();
     Vector2f playerPos = player.getPosition();
     float ballRadius = ball.getRadius();
+    ballSpeedY = 10;
     if (ballSpeedX < 0) {
-            std::cout << "hit player 1";
-            velocity = Vector2f(-1, 0);
+        if (ballPosition.y > (playerPos.y - player.getSize().y / 3)) {
+            //if ball hits top third
+            ballSpeedY *= 1.5;
+           }
+        if (ballPosition.y < (playerPos.y - ((player.getSize().y / 3) * 2))) {
+            //if ball hits bottom third
+            ballSpeedY *= .5;
+        }
+            velocity = Vector2f(-1, ballSpeedY);
     }
     else
     {
-            std::cout << "hit player 2";
-            velocity = Vector2f(-1, 0);
+        if (ballPosition.y > (playerPos.y - player.getSize().y / 3)) {
+            //if ball hits top third
+            ballSpeedY *= 1.5;
+        }
+        if (ballPosition.y < (playerPos.y - ((player.getSize().y / 3) * 2))) {
+            //if ball hits bottom third
+            ballSpeedY *= 5;
+        }
+            velocity = Vector2f(-1, ballSpeedY);
 
     }
     return velocity;
@@ -106,6 +127,14 @@ int Pong::Play()
     RectangleShape middle(Vector2f(10, 10));
     middle.setFillColor(Color(200, 200, 200));
 
+  /*  CircleShape ball2(5);
+    ball2.setFillColor(Color(200, 200, 200));
+    ball2.setPosition(0, 0);
+
+
+    RectangleShape player22(Vector2f(10, 10));
+    player22.setFillColor(Color(20, 200, 200));
+    player22.setPosition(10, 0);*/
 
     std::cout << "Play";
     // run the program as long as the window is open
@@ -140,6 +169,8 @@ int Pong::Play()
         window->draw(ball);
         window->draw(player1);
         window->draw(player2);
+        //window->draw(ball2);
+        //window->draw(player22);
         for (float i = 0; i < 600; i += 20) {
             middle.setPosition(400, i);
             window->draw(middle);
