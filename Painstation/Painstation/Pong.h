@@ -1,4 +1,5 @@
 #pragma once
+#include "Player.h"
 #include <iostream>
 #define SFML_STATIC
 #include <SFML/Window.hpp>
@@ -10,8 +11,8 @@ public:
 	int Play();
 
 private:
-	void movePlayer(RectangleShape*, Keyboard::Key, Keyboard::Key);
-	void moveBall(CircleShape*, RectangleShape, RectangleShape);
+	void movePlayer(Player*, Keyboard::Key, Keyboard::Key);
+	void moveBall(CircleShape*, Player, Player);
 	Vector2f deflectBall(CircleShape, RectangleShape);
 };
 
