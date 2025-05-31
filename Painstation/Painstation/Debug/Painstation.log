@@ -1,15 +1,13 @@
-﻿  Pong.cpp
+﻿  Button.cpp
+  Pong.cpp
+C:\Users\Aydee\Desktop\PainStationGit\Painstation\Painstation\Pong.cpp(215,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/FORCE' specification
 Player.obj : warning LNK4006: "int immunityPoint" (?immunityPoint@@3HA) already defined in Painstation.obj; second definition ignored
 Player.obj : warning LNK4006: "float otherPlayerSpeed" (?otherPlayerSpeed@@3MA) already defined in Painstation.obj; second definition ignored
-Player.obj : warning LNK4006: "float speed" (?speed@@3MA) already defined in Painstation.obj; second definition ignored
-Player.obj : warning LNK4006: "enum sf::Keyboard::Key upKey" (?upKey@@3W4Key@Keyboard@sf@@A) already defined in Painstation.obj; second definition ignored
-Player.obj : warning LNK4006: "enum sf::Keyboard::Key downKey" (?downKey@@3W4Key@Keyboard@sf@@A) already defined in Painstation.obj; second definition ignored
 Pong.obj : warning LNK4006: "int immunityPoint" (?immunityPoint@@3HA) already defined in Painstation.obj; second definition ignored
 Pong.obj : warning LNK4006: "float otherPlayerSpeed" (?otherPlayerSpeed@@3MA) already defined in Painstation.obj; second definition ignored
-Pong.obj : warning LNK4006: "float speed" (?speed@@3MA) already defined in Painstation.obj; second definition ignored
-Pong.obj : warning LNK4006: "enum sf::Keyboard::Key upKey" (?upKey@@3W4Key@Keyboard@sf@@A) already defined in Painstation.obj; second definition ignored
-Pong.obj : warning LNK4006: "enum sf::Keyboard::Key downKey" (?downKey@@3W4Key@Keyboard@sf@@A) already defined in Painstation.obj; second definition ignored
+Pong.obj : warning LNK4006: "class sf::RenderWindow * window" (?window@@3PAVRenderWindow@sf@@A) already defined in Painstation.obj; second definition ignored
 PowerUps.obj : warning LNK4006: "int immunityPoint" (?immunityPoint@@3HA) already defined in Painstation.obj; second definition ignored
 PowerUps.obj : warning LNK4006: "float otherPlayerSpeed" (?otherPlayerSpeed@@3MA) already defined in Painstation.obj; second definition ignored
 C:\Users\Aydee\Desktop\PainStationGit\Painstation\Debug\Painstation.exe : warning LNK4088: image being generated due to /FORCE option; image may not run

@@ -1,6 +1,10 @@
 #include "PowerUps.h"
 #include <stdio.h>
 
+PowerUps::PowerUps()
+{
+}
+
 PowerUps::PowerUps(Color fillColor)
 {
 	powerUpObject.setFillColor(fillColor);
@@ -27,6 +31,7 @@ PowerUps::PowerUps(Color fillColor, int immunityPoints)
 	powerUpObject.setPosition(20, 20);
 	powerUpObject.setSize(Vector2f(10, 10));
 }
+
 
 
 

@@ -1,25 +1,30 @@
 #include "Player.h"
 
-Player::Player(float speeds, Vector2f position, Keyboard::Key keyUp, Keyboard::Key keyDown) {
+Player::Player(float speeds, int playerID, Vector2f position, Keyboard::Key keyUp, Keyboard::Key keyDown) {
 	playerObject.setSize(Vector2f(10, 30));
 	playerObject.setFillColor(Color(255, 255, 255));
 	playerObject.setPosition(position);
 	speed = speeds;
 	upKey = keyUp;
-	score = 0;
+	this->playerID = playerID;
+	misses = 0;
 	immunityPoints = 0;
 }
 
 void Player::PowerUpGained()
 {
-	printf_s("MyHandler1 was called");
+	std::cout << "hi" << std::endl;
 }
 
 void Player::hookEvent(PowerUps* powerUp)
 {
 	__hook(&PowerUps::HitPlayer, powerUp, &Player::PowerUpGained);
+	powerUp = nullptr;
+	delete powerUp;
 }
 
 void Player::unhookEvent(PowerUps* powerUp) {
 	__unhook(&PowerUps::HitPlayer, powerUp, &Player::PowerUpGained);
+	powerUp = nullptr;
+	delete powerUp;
 }

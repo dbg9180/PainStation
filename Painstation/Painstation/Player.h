@@ -5,23 +5,26 @@
 #include <SFML/Graphics.hpp>
 using namespace sf;
 #include "PowerUps.h"
-using namespace sf;
 
-float speed;
-Keyboard::Key upKey;
-Keyboard::Key downKey;
+
+
 
 class Player
 {
 
 public:
-	Player(float, Vector2f, Keyboard::Key, Keyboard::Key);
+	Player(float, int, Vector2f, Keyboard::Key, Keyboard::Key);
 	void PowerUpGained();
 	void hookEvent(PowerUps*);
 	void unhookEvent(PowerUps*);
 	RectangleShape playerObject;
-	int score;
+	int misses;
 	int immunityPoints;
+	int playerID;
+private:
+	float speed;
+	Keyboard::Key upKey;
+	Keyboard::Key downKey;
 };
 	
 

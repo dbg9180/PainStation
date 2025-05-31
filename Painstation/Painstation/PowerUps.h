@@ -9,6 +9,7 @@ using namespace sf;
 		//gives other player pain
 		//speeds up other player
 		//gives immunity to next pain
+
 int immunityPoint;
 float otherPlayerSpeed;
 
@@ -16,6 +17,8 @@ float otherPlayerSpeed;
 class PowerUps
 {
 	public:
+		//default constructor
+		PowerUps();
 		//base powerup
 		PowerUps(Color);
 		//speeds up other player
