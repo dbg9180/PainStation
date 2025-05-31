@@ -33,6 +33,7 @@ private:
 	void moveBall(CircleShape*, Player, Player);
 	Vector2f deflectBall(CircleShape, RectangleShape);
 	Vector2f ballHitsBehindPlayer(Player*);
+	int serial_fd;
 	
 };
 

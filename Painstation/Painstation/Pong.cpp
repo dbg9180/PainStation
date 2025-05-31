@@ -42,6 +42,7 @@ Pong::Pong() {
 }
 Pong::Pong(RenderWindow* mainWindow, int serial) {
     window = mainWindow;
+    serial_fd = serial;
     ball = CircleShape(10);
     ball.setFillColor(Color(200, 200, 200));
     ball.setPosition(400, 300);
@@ -121,7 +122,7 @@ Vector2f Pong::ballHitsBehindPlayer(Player* player) {
         if (player1.misses >= 1) {
          //send message
              //3 int's, player + punishment + punishment level
-           const char* message = player->playerid + punishment + punishmentlevel + "\n";
+           const char* message = player->playerID + punishment + 2 + "\n";
             ssize_t bytes_written = write(serial_fd, message, strlen(message));
         
             if (bytes_written < 0) {
