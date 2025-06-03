@@ -21,6 +21,7 @@ public:
 	int misses;
 	int immunityPoints;
 	int playerID;
+	RectangleShape* punishmentRect;
 private:
 	float speed;
 	Keyboard::Key upKey;

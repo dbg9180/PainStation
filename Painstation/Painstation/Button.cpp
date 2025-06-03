@@ -30,16 +30,6 @@ void Button::update(RenderWindow& window)
             released = false;
 
         }
-        if (Mouse::isButtonPressed(Mouse::Right))
-        {
-            if (released)
-            {
-                clicked = true;
-            }
-            released = false;
-
-        }
-
         window.draw(buttonSprite);
         window.draw(buttonText);
     }

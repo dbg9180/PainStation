@@ -1,6 +1,6 @@
-﻿  Button.cpp
+﻿  Painstation.cpp
   Pong.cpp
-C:\Users\Aydee\Desktop\PainStationGit\Painstation\Painstation\Pong.cpp(215,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Aydee\Desktop\PainStationGit\Painstation\Painstation\Pong.cpp(207,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Generating Code...
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/FORCE' specification
 Player.obj : warning LNK4006: "int immunityPoint" (?immunityPoint@@3HA) already defined in Painstation.obj; second definition ignored

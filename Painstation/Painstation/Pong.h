@@ -11,6 +11,7 @@ public:
 	//default constructor
 	Pong();
 	Pong(RenderWindow*, int);
+	void setPunishmentColor(Player*);
 	Vector2f deflectOffPlayer(float ballPositionY, float playerPosY, float playerSizeY);
 	int Play();
 

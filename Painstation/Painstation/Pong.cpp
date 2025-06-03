@@ -24,6 +24,8 @@ int middlePos[32];
 int punishment = 1;
 int punishmentLevel = 1;
 
+std::map<int, Color> punishments;
+
 
 Pong::Pong() {
     ball = CircleShape(10);
@@ -56,7 +58,19 @@ Pong::Pong(RenderWindow* mainWindow, int serial) {
         middlePos[i] = yPos;
         yPos += 20;
     }
+    punishments[0] = Color::Black;
+    punishments[1] = Color::Red;
+    punishments[2] = Color::Blue;
+    punishments[3] = Color::Yellow;
+
 }
+
+void Pong::setPunishmentColor(Player* player) {
+    punishment = (rand() % 3) + 1;
+    player->punishmentRect->setFillColor(punishments[punishment]);
+    std::cout << "set color" << punishment << std::endl;
+}
+
 void Pong::movePlayer(Player* player, Keyboard::Key upKey, Keyboard::Key downKey)
 {
     //move player within the window
@@ -85,26 +99,26 @@ void Pong::moveBall(CircleShape* ball, Player player1, Player player2)
     speedModifier = Vector2f(1, 1);
     ballRadius = ball->getRadius();
     //if it hits the bottom/top wall
-    if (ball->getPosition().y >= ((window->getSize().y - ball->getRadius() * 2)+1) || ballPosition.y <= 1)
+    if (ball->getPosition().y >= ((window->getSize().y - ball->getRadius() * 2)-5) || ballPosition.y <= 5)
     {
         ballSpeedY *= -1;
     }
 
     //if it hits behind a player count that against the player it missed
-    if ((ballPosition.x >= window->getSize().x - ball->getRadius() * 2))
+    if ((ballPosition.x >= window->getSize().x - ball->getRadius() * 2 -5))
     {
         speedModifier = ballHitsBehindPlayer(&player2);
     }
-    else if (ballPosition.x <= 0) {
+    else if (ballPosition.x <= 5) {
         speedModifier =  ballHitsBehindPlayer(&player1);
     }
     if ((player1Bounds.contains(ballPosition.x, ballPosition.y - (ballRadius)) || player1Bounds.contains(ballPosition.x, ballPosition.y + ballRadius)) && ballSpeedX < 0) {
-        std::cout << "hit player 1";
         speedModifier = deflectBall(*ball, player1.playerObject);
+        setPunishmentColor(&player1);
     }
     if ((player2Bounds.contains(ballPosition.x + ballRadius, ballPosition.y - (ballRadius)) || player2Bounds.contains(ballPosition.x + ballRadius, ballPosition.y + ballRadius)) && ballSpeedX > 0) {
-        std::cout << "hit player 2";
         speedModifier = deflectBall(*ball, player2.playerObject);
+        setPunishmentColor(&player2);
     }
     ballSpeedX *= speedModifier.x;
     ballSpeedY *= speedModifier.y;
@@ -119,18 +133,18 @@ Vector2f Pong::ballHitsBehindPlayer(Player* player) {
         // or homage to orig pain station
         //Player missed
         player->misses += 1;
-        if (player1.misses >= 1) {
+        setPunishmentColor(player);
          //send message
-             //3 int's, player + punishment + punishment level
-           const char* message = player->playerID + punishment + 2 + "\n";
-            ssize_t bytes_written = write(serial_fd, message, strlen(message));
+         // 
+           //  //3 int's, player + punishment + punishment level
+           //const char* message = player->playerID + punishment + 2 + "\n";
+           // ssize_t bytes_written = write(serial_fd, message, strlen(message));
         
-            if (bytes_written < 0) {
-                std::cerr << "error writing to serial port" << std::endl;
-            } else {
-                std::cout << "successfully wrote " << bytes_written << " bytes to serial port" << std::endl;
-            }
-        }
+           // if (bytes_written < 0) {
+           //     std::cerr << "error writing to serial port" << std::endl;
+           // } else {
+           //     std::cout << "successfully wrote " << bytes_written << " bytes to serial port" << std::endl;
+           // }
         player = nullptr;
         delete player;
         return Vector2f(-1, 1);
@@ -156,16 +170,11 @@ Vector2f Pong::deflectBall(CircleShape ball, RectangleShape player) {
 
 int Pong::Play()
 {
-    //make the window
-    window = new RenderWindow(VideoMode(800, 600), "My window");
-
     std::cout << "Play";
-    //player1.hookEvent(&powerup);
-   // player2.hookEvent(&powerup);
     // run the program as long as the window is open
+    sfClock.restart();
     while (window->isOpen())
     {
-
         deltaTime = sfClock.restart().asSeconds();
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
@@ -185,36 +194,23 @@ int Pong::Play()
 
         //update the circle position
         moveBall(&ball, player1, player2);
+          
 
         //render objects
         window->draw(ball);
         window->draw(player1.playerObject);
         window->draw(player2.playerObject);
-        for (int i = 0; i <  32; i++) 
+        window->draw(*player1.punishmentRect);
+        window->draw(*player2.punishmentRect);
+        for (int i = 0; i < 32; i++)
         {
             middle.setPosition(400, middlePos[i]);
             window->draw(middle);
         }
-        //ENCAPSULATE
-        if (player1PowerUpActive == true) {
-            //powerup.HitPlayer();
-            //window->draw(powerup.powerUpObject);
-            //if (player1.playerObject.getGlobalBounds().contains(powerup.powerUpObject.getPosition())) {
-
-          //  }
-        }
-    
-        if (player2PowerUpActive) {
-            //window->draw(powerup.powerUpObject);
-            //if (player2.playerObject.getGlobalBounds().contains(powerup.powerUpObject.getPosition())) {
-               // powerup.HitPlayer();
-            //}
-        }
+        
         // end the current frame
         window->display();
     }
-    //player1.unhookEvent(&powerup);
-   //   player2.unhookEvent(&powerup);
     return 0;
 }
 
