@@ -18,21 +18,21 @@ Player::Player(float speeds, int playerID, Vector2f position, Keyboard::Key keyU
 	}
 	punishmentRect->setFillColor(Color::Black);
 }
+//
+//void Player::PowerUpGained()
+//{
+//	std::cout << "hi" << std::endl;
+//}
 
-void Player::PowerUpGained()
-{
-	std::cout << "hi" << std::endl;
-}
-
-void Player::hookEvent(PowerUps* powerUp)
-{
-	__hook(&PowerUps::HitPlayer, powerUp, &Player::PowerUpGained);
-	powerUp = nullptr;
-	delete powerUp;
-}
-
-void Player::unhookEvent(PowerUps* powerUp) {
-	__unhook(&PowerUps::HitPlayer, powerUp, &Player::PowerUpGained);
-	powerUp = nullptr;
-	delete powerUp;
-}
+//void Player::hookEvent(PowerUps* powerUp)
+//{
+//	__hook(&PowerUps::HitPlayer, powerUp, &Player::PowerUpGained);
+//	powerUp = nullptr;
+//	delete powerUp;
+//}
+//
+//void Player::unhookEvent(PowerUps* powerUp) {
+//	__unhook(&PowerUps::HitPlayer, powerUp, &Player::PowerUpGained);
+//	powerUp = nullptr;
+//	delete powerUp;
+//}

@@ -4,7 +4,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 using namespace sf;
-#include "PowerUps.h"
+//#include "PowerUps.h"
 
 
 
@@ -14,9 +14,9 @@ class Player
 
 public:
 	Player(float, int, Vector2f, Keyboard::Key, Keyboard::Key);
-	void PowerUpGained();
-	void hookEvent(PowerUps*);
-	void unhookEvent(PowerUps*);
+	//void PowerUpGained();
+	//void hookEvent(PowerUps*);
+	//void unhookEvent(PowerUps*);
 	RectangleShape playerObject;
 	int misses;
 	int immunityPoints;

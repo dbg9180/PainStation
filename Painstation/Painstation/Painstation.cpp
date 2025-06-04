@@ -17,6 +17,9 @@ RenderWindow* window;
 Button* pongButton;
 int serial_fd;
 const char* serial_port_path;
+Font font;
+Text disclaimer;
+
 //
 //int serial() {
 //
@@ -72,6 +75,14 @@ int main()
 {
     //make the window
     window = new RenderWindow(VideoMode(800, 600), "My window");
+
+    //disclaimer
+    font.loadFromFile("..\\Font\\Roboto-VariableFont_wdth,wght.ttf");
+    disclaimer.setFont(font);
+    disclaimer.setPosition(300, 200);
+    disclaimer.setCharacterSize(30);
+    disclaimer.setString("DISCLAIMER NOT WRITTEN YET,\nBY PRESSING PLAY YOU AGREE\nTO THESE TERMS AND CONDITIONS.");
+
     pongButton = new Button(Vector2f(100, 100), Vector2f(100, 250), "Pong", 1);
     pongButton->active = true;
 
@@ -96,8 +107,11 @@ int main()
             p.Play();
         }
      
-        if (pongButton->active)
+        if (pongButton->active) {
             pongButton->update(*window);
+            window->draw(disclaimer);
+        }
+
         // end the current frame
         window->display();
     }

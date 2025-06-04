@@ -1,8 +1,6 @@
 ﻿  Painstation.cpp
-  Pong.cpp
-C:\Users\Aydee\Desktop\PainStationGit\Painstation\Painstation\Pong.cpp(207,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/FORCE' specification
+Painstation.obj : warning LNK4006: "class sf::Font font" (?font@@3VFont@sf@@A) already defined in Button.obj; second definition ignored
 Player.obj : warning LNK4006: "int immunityPoint" (?immunityPoint@@3HA) already defined in Painstation.obj; second definition ignored
 Player.obj : warning LNK4006: "float otherPlayerSpeed" (?otherPlayerSpeed@@3MA) already defined in Painstation.obj; second definition ignored
 Pong.obj : warning LNK4006: "int immunityPoint" (?immunityPoint@@3HA) already defined in Painstation.obj; second definition ignored
